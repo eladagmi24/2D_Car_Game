@@ -10,6 +10,371 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="vertical"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock3"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock4"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock5"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock6"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock7"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock8"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock9"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_carLeft"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/race" />
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock10"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/rocks" />
+
+                <ImageView
+                    android:id="@+id/main_IMG_explosion1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/explosion" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/main_BTN_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:backgroundTint="#00877878"
+                    app:srcCompat="@drawable/left"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="vertical"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock11"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock12"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock13"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock14"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock15"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock16"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock17"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock18"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock19"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/rocks" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/main_IMG_explosion2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/explosion" />
+                <ImageView
+                    android:id="@+id/main_IMG_carMiddleLeft"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/race" />
+
+                <ImageView
+                    android:id="@+id/main_IMG_rock20"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/rocks" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_weight="10"
         android:orientation="vertical">
@@ -22,13 +387,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/main_IMG_rock1"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock21"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:visibility="invisible"
                 app:srcCompat="@drawable/rocks" />
@@ -36,13 +401,52 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_IMG_rock22"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rocks" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_IMG_rock23"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rocks" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_IMG_rock24"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rocks" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_rock2"
-                android:layout_width="76dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock25"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/rocks"
                 android:visibility="invisible"/>
@@ -50,13 +454,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_rock3"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock26"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/rocks"
                 android:visibility="invisible"/>
@@ -64,13 +468,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_rock4"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock27"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/rocks"
                 android:visibility="invisible"/>
@@ -78,13 +482,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_rock5"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock28"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/rocks"
                 android:visibility="invisible"/>
@@ -92,69 +496,179 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_rock6"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock29"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:srcCompat="@drawable/rocks" />
 
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical" >
+
             <ImageView
-                android:id="@+id/main_IMG_explosion1"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:id="@+id/main_IMG_carMiddle"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/race" />
+            <ImageView
+                android:id="@+id/main_IMG_explosion3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:visibility="gone"
                 app:srcCompat="@drawable/explosion" />
-
             <ImageView
-                android:id="@+id/main_IMG_carLeft"
-                android:layout_width="wrap_content"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock30"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:visibility="gone"
-                app:srcCompat="@drawable/race" />
+                app:srcCompat="@drawable/rocks" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/main_BTN_left"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#00877878"
-                app:srcCompat="@drawable/left" />
-        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_weight="10"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical"
+            ></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_rock7"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock31"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rocks" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock32"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rocks" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock33"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rocks" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock34"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rocks" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock35"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rocks" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock36"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/rocks"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock37"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/rocks"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock38"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/rocks"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock39"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/rocks"
                 android:visibility="invisible"/>
@@ -162,84 +676,32 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/main_IMG_rock8"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/rocks"
-                android:visibility="invisible"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/main_IMG_rock9"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/rocks"
-                android:visibility="invisible"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/main_IMG_rock10"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/rocks"
-                android:visibility="invisible"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/main_IMG_rock11"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/rocks"
-                android:visibility="invisible"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
 
             <ImageView
-                android:id="@+id/main_IMG_rock12"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock40"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:visibility="gone"
                 app:srcCompat="@drawable/rocks" />
 
             <ImageView
-                android:id="@+id/main_IMG_explosion2"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:id="@+id/main_IMG_explosion4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:visibility="gone"
                 app:srcCompat="@drawable/explosion" />
 
             <ImageView
-                android:id="@+id/main_IMG_carMiddle"
-                android:layout_width="wrap_content"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_carMiddleRight"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 app:srcCompat="@drawable/race" />
 
         </LinearLayout>
@@ -282,41 +744,65 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/main_IMG_rock13"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock41"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/rocks"
                 android:visibility="invisible"/>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/main_IMG_rock14"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/rocks"
-                android:visibility="invisible"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/main_IMG_rock15"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock42"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/rocks"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_IMG_rock43"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/rocks"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_IMG_rock44"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/rocks"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock45"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/rocks"
                 android:visibility="invisible"/>
@@ -324,13 +810,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="vertical">
+            android:layout_height="60dp"
+            android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/main_IMG_rock16"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock46"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/rocks"
                 android:visibility="invisible"/>
@@ -338,13 +824,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_rock17"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock47"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/rocks"
                 android:visibility="invisible"/>
@@ -352,29 +838,55 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_rock18"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:id="@+id/main_IMG_rock48"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/rocks"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock49"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/rocks"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_rock50"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:visibility="gone"
                 app:srcCompat="@drawable/rocks" />
 
             <ImageView
-                android:id="@+id/main_IMG_explosion3"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:id="@+id/main_IMG_explosion5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:visibility="gone"
                 app:srcCompat="@drawable/explosion" />
 
             <ImageView
                 android:id="@+id/main_IMG_carRight"
-                android:layout_width="wrap_content"
-                android:layout_height="82dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:visibility="gone"
                 app:srcCompat="@drawable/race" />
