@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Morgan">
         <activity
+            android:name=".RecordAndMapActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
