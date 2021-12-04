@@ -15,9 +15,12 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 public class ListFragment extends Fragment {
-    private MaterialTextView list_LBL_title;
     private TextInputLayout list_EDT_name;
-    private MaterialButton list_BTN_refresh;
+    private MaterialTextView list_LBL_title;
+    private MaterialTextView list_TXT_distance;
+    private MaterialTextView list_TXT_coins;
+
+    private MaterialButton list_BTN_enter;
 
     private CallBack_List callBackList;
 
@@ -31,7 +34,9 @@ public class ListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         findViews(view);
         initViews();
-
+        Bundle bundle = this.getArguments();
+        list_TXT_coins.setText("Coins: " + bundle.getString("coins"));
+        list_TXT_distance.setText("Distance: " + bundle.getString("distance"));
         return view;
     }
 
@@ -51,12 +56,14 @@ public class ListFragment extends Fragment {
                     callBackList.setMainTitle(getName());
             }
         };
-        list_BTN_refresh.setOnClickListener(listener);
+        list_BTN_enter.setOnClickListener(listener);
     }
 
     private void findViews(View view) {
         list_LBL_title = view.findViewById(R.id.list_LBL_title);
         list_EDT_name = view.findViewById(R.id.list_EDT_name);
-        list_BTN_refresh = view.findViewById(R.id.list_BTN_refresh);
+        list_BTN_enter = view.findViewById(R.id.list_BTN_enter);
+        list_TXT_distance = view.findViewById(R.id.list_TXT_distance);
+        list_TXT_coins = view.findViewById(R.id.list_TXT_coins);
     }
 }

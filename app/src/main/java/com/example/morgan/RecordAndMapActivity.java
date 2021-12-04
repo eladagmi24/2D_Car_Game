@@ -2,6 +2,7 @@ package com.example.morgan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -9,13 +10,13 @@ public class RecordAndMapActivity extends AppCompatActivity {
 
     private ListFragment listFragment;
     private MapFragment mapFragment;
-
+    private String distance, coins;
     private TextView info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_record_and_map);
 
         info = findViewById(R.id.info);
 
@@ -26,6 +27,13 @@ public class RecordAndMapActivity extends AppCompatActivity {
         mapFragment = new MapFragment();
         mapFragment.setCallBackMap(callBack_map);
         getSupportFragmentManager().beginTransaction().add(R.id.frame2, mapFragment).commit();
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("bundle");
+        distance = bundle.getString("distance");
+        coins = bundle.getString("coins");
+
+        listFragment.setArguments(bundle);
     }
 
     CallBack_List callBack_List = new CallBack_List() {

@@ -3,6 +3,7 @@ package com.example.morgan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -17,6 +18,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
@@ -118,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
     }
 
     private void createGame() {
@@ -285,9 +289,21 @@ public class MainActivity extends AppCompatActivity {
                         updateCoins();
                     odometer.setText(String.valueOf(clock));
                     coinsText.setText(String.valueOf(coinsCounter));
+                    if(countHearts <= 0)
+                        finishGame();
                 });
             }
         }, 0, DELAY);
+    }
+
+    private void finishGame() {
+        backgrounds.stop();
+        Intent intent = new Intent(this, RecordAndMapActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("distance", String.valueOf(clock));
+        bundle.putString("coins", String.valueOf(coinsCounter));
+        intent.putExtra("bundle", bundle);
+        startActivity(intent);
     }
 
     @Override
@@ -586,5 +602,7 @@ public class MainActivity extends AppCompatActivity {
         int num = (int) (Math.random() * (max - min)) + min;
         return num;
     }
+
+
 }
 

@@ -12,21 +12,23 @@
         android:id="@+id/list_LBL_title"
         android:layout_width="120dp"
         android:layout_height="60dp"
-        android:text="Hello World!"
-        android:textColor="@color/purple_500"
-        android:layout_margin="8dp"
-        android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:maxLines="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:autoSizeTextType="uniform"
-        />
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="Race details:"
+        android:textColor="@color/purple_500" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/list_EDT_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="Enter your name"
         android:layout_below="@id/list_LBL_title"
         android:padding="8dp"
         >
@@ -39,15 +41,35 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/list_BTN_enter"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/list_BTN_refresh"
-        android:text="Refresh"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/list_EDT_name"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        app:strokeColor="@color/purple_500"
-        app:cornerRadius="50dp"/>
+        android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
+        android:text="Enter"
+        app:cornerRadius="50dp"
+        app:strokeColor="@color/purple_500" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/list_TXT_coins"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_EDT_name"
+        android:layout_marginLeft="15dp"
+        android:text="Coins:"
+        android:textSize="20sp">
+
+    </com.google.android.material.textview.MaterialTextView>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/list_TXT_distance"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_EDT_name"
+        android:layout_marginLeft="170dp"
+        android:text="Distance:"
+        android:textSize="20sp">
+
+    </com.google.android.material.textview.MaterialTextView>
 </RelativeLayout>
