@@ -21,6 +21,12 @@ public class RecordAndMapActivity extends AppCompatActivity {
         info = findViewById(R.id.info);
 
         listFragment = new ListFragment();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("bundle");
+        distance = bundle.getString("distance");
+        coins = bundle.getString("coins");
+
+        listFragment.setArguments(bundle);
         listFragment.setCallBackList(callBack_List);
         getSupportFragmentManager().beginTransaction().add(R.id.frame1, listFragment).commit();
 
@@ -28,12 +34,6 @@ public class RecordAndMapActivity extends AppCompatActivity {
         mapFragment.setCallBackMap(callBack_map);
         getSupportFragmentManager().beginTransaction().add(R.id.frame2, mapFragment).commit();
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("bundle");
-        distance = bundle.getString("distance");
-        coins = bundle.getString("coins");
-
-        listFragment.setArguments(bundle);
     }
 
     CallBack_List callBack_List = new CallBack_List() {

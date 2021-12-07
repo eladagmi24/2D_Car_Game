@@ -1,7 +1,7 @@
 package com.example.morgan;
 
 public class Record {
-    private String name ="";
+//    private String name ="";
     private int distance=0;
     private int coins=0;
     private double lat=0.0;
@@ -10,31 +10,35 @@ public class Record {
     public Record() {
     }
 
-    public String getName() {
-        return name;
-    }
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public Record setName(String name) {
+//        this.name = name;
+//        return this;
+//    }
 
-    public Record setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public int getScore() {
+    public int getDistance() {
         return distance;
     }
 
-    public Record setScore(int score) {
-        this.distance = score;
+    public Record setDistance(int distance) {
+        this.distance = distance;
         return this;
     }
 
-    public long getTime() {
+    public int getCoins() {
         return coins;
     }
 
-    public Record setTime(int coins) {
+    public Record setCoins(int coins) {
         this.coins = coins;
         return this;
+    }
+
+    public long getScore(){
+        return distance*coins;
     }
 
     public double getLat() {
@@ -53,5 +57,10 @@ public class Record {
     public Record setLon(double lon) {
         this.lon = lon;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Coins: " + coins + ", Distance: " + distance;
     }
 }

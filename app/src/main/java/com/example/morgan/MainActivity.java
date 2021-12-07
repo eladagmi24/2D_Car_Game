@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -28,6 +30,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MyDB myDB;
     private ImageView[] cars = new ImageView[5];
     private ImageView[] explosion = new ImageView[5];
     private ImageView[] hearts = new ImageView[3];
@@ -125,6 +128,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createGame() {
+        String fromJSON = MSPv3.getInstance(this).getStringSP("MY_DB","");
+        myDB = new Gson().fromJson(fromJSON,MyDB.class);
+        if(myDB == null)
+            myDB = new MyDB();
         createCars();
         createExplosion();
         createRocks();
@@ -297,12 +304,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void finishGame() {
+        Record record = new Record();
+        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         backgrounds.stop();
+        if(myDB == null || myDB.getRecords().size() < 10)
+        {
+            record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
+            myDB.getRecords().add(record);
+        }
+
+        for(int i = 0; i < myDB.getRecords().size(); i++)
+        {
+
+            if(myDB.getRecords().get(i).getScore() < clock*coinsCounter){
+                record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
+                myDB.getRecords().set(i, record);
+                break;
+            }
+
+        }
         Intent intent = new Intent(this, RecordAndMapActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("distance", String.valueOf(clock));
-        bundle.putString("coins", String.valueOf(coinsCounter));
-        intent.putExtra("bundle", bundle);
+        String json = new Gson().toJson(myDB);
+        bundle.putString("myDB", json);
+        intent.putExtra("myDB", bundle);
+        finish();
         startActivity(intent);
     }
 
@@ -320,9 +347,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateRocks() {
         ++clock;
-        if (countHearts < 0) {
-            countHearts = 2;
-        }
         if (onStart) {
             num = setRandom();
             onStart = false;

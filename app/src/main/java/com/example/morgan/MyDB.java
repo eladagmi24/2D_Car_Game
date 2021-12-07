@@ -3,9 +3,11 @@ package com.example.morgan;
 import java.util.ArrayList;
 
 public class MyDB {
-    private ArrayList<Record> records = new ArrayList<>();
+    private ArrayList<Record> records;
 
-    public MyDB() {    }
+    public MyDB() {
+    records = new ArrayList<>();
+    }
 
     public ArrayList<Record> getRecords() {
         return records;
