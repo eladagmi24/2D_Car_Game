@@ -19,7 +19,7 @@ public class ListFragment extends Fragment {
     private MaterialTextView list_LBL_title;
     private MaterialTextView list_TXT_distance;
     private MaterialTextView list_TXT_coins;
-
+    private MyDB myDB;
     private MaterialButton list_BTN_enter;
 
     private CallBack_List callBackList;
@@ -37,6 +37,7 @@ public class ListFragment extends Fragment {
         Bundle bundle = this.getArguments();
         list_TXT_coins.setText("Coins: " + bundle.getString("coins"));
         list_TXT_distance.setText("Distance: " + bundle.getString("distance"));
+        myDB = new MyDB();
         return view;
     }
 
@@ -57,6 +58,11 @@ public class ListFragment extends Fragment {
             }
         };
         list_BTN_enter.setOnClickListener(listener);
+//        myDB.getRecords().add(new Record().setName(list_EDT_name.getEditText().getText().toString())
+//                .setScore(list_TXT_distance)
+//                .setTime()
+//                .setLat()
+//                .setLon());
     }
 
     private void findViews(View view) {
