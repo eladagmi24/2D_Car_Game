@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class RecordAndMapActivity extends AppCompatActivity {
 
-    private ListFragment listFragment;
+   // private ListFragment listFragment;
     private MapFragment mapFragment;
     private String distance, coins;
     private TextView info;
@@ -20,12 +20,9 @@ public class RecordAndMapActivity extends AppCompatActivity {
 
         info = findViewById(R.id.info);
 
-        listFragment = new ListFragment();
         Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("bundle");
-        distance = bundle.getString("distance");
-        coins = bundle.getString("coins");
-
+        Bundle bundle = intent.getBundleExtra("myDB");
+        ListFragment listFragment = new ListFragment();
         listFragment.setArguments(bundle);
         listFragment.setCallBackList(callBack_List);
         getSupportFragmentManager().beginTransaction().add(R.id.frame1, listFragment).commit();
@@ -56,7 +53,7 @@ public class RecordAndMapActivity extends AppCompatActivity {
     CallBack_Map callBack_map = new CallBack_Map() {
         @Override
         public void mapClicked(double lat, double lon) {
-            listFragment.setTitle("City");
+            //listFragment.setTitle("City");
         }
     };
 }

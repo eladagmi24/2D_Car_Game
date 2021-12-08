@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
                         updateCoins();
                     odometer.setText(String.valueOf(clock));
                     coinsText.setText(String.valueOf(coinsCounter));
-                    if(countHearts <= 0)
+                    if(countHearts < 0)
                         finishGame();
                 });
             }
@@ -305,32 +305,60 @@ public class MainActivity extends AppCompatActivity {
 
     private void finishGame() {
         Record record = new Record();
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         backgrounds.stop();
-        if(myDB == null || myDB.getRecords().size() < 10)
-        {
+//        if(myDB == null || myDB.getRecords().size() < 10)
+//        {
+//            record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
+//            myDB.getRecords().add(record);
+//        }
+
+//        for(int i = 0; i < myDB.getRecords().size(); i++)
+//        {
+//
+//            if(myDB.getRecords().get(i).getScore() < clock*coinsCounter){
+//                record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
+//                myDB.getRecords().set(i, record);
+//
+//                break;
+//            }
+//
+//        }
+
+        Log.d("size", "" + myDB.getRecords().size());
+        if (myDB.getRecords().size() == 0) {
             record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
             myDB.getRecords().add(record);
         }
-
-        for(int i = 0; i < myDB.getRecords().size(); i++)
-        {
-
-            if(myDB.getRecords().get(i).getScore() < clock*coinsCounter){
-                record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
-                myDB.getRecords().set(i, record);
-                break;
-            }
-
+        else if (myDB.getRecords().size() <= 10) {
+            record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
+            myDB.getRecords().add(record);
+        } else if (myDB.getRecords().get(myDB.getRecords().size() - 1).getScore() < clock * coinsCounter) {
+            record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
+            myDB.getRecords().set(myDB.getRecords().size() - 1, record);
         }
+        sortMyDB(myDB);
+
+
         Intent intent = new Intent(this, RecordAndMapActivity.class);
         Bundle bundle = new Bundle();
         String json = new Gson().toJson(myDB);
         bundle.putString("myDB", json);
         intent.putExtra("myDB", bundle);
+        MSPv3.getInstance(this).putStringSP("MY_DB", json);
         finish();
         startActivity(intent);
+    }
+
+    private void sortMyDB(MyDB myDB) {
+        Record tempRecord;
+        for(int i = myDB.getRecords().size() - 1; i >= 0; i--)
+            if(i >= 1 && myDB.getRecords().get(i).getScore() > myDB.getRecords().get(i - 1).getScore()) {
+                tempRecord = myDB.getRecords().get(i - 1);
+                myDB.getRecords().set(i - 1, myDB.getRecords().get(i));
+                myDB.getRecords().set(i, tempRecord);
+            }
     }
 
     @Override
