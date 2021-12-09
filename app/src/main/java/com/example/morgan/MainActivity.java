@@ -308,24 +308,6 @@ public class MainActivity extends AppCompatActivity {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         backgrounds.stop();
-//        if(myDB == null || myDB.getRecords().size() < 10)
-//        {
-//            record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
-//            myDB.getRecords().add(record);
-//        }
-
-//        for(int i = 0; i < myDB.getRecords().size(); i++)
-//        {
-//
-//            if(myDB.getRecords().get(i).getScore() < clock*coinsCounter){
-//                record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
-//                myDB.getRecords().set(i, record);
-//
-//                break;
-//            }
-//
-//        }
-
         Log.d("size", "" + myDB.getRecords().size());
         if (myDB.getRecords().size() == 0) {
             record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
@@ -657,4 +639,3 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
-

@@ -2,16 +2,25 @@ package com.example.morgan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class RecordAndMapActivity extends AppCompatActivity {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class RecordAndMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
    // private ListFragment listFragment;
     private MapFragment mapFragment;
     private String distance, coins;
     private TextView info;
+    private GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,8 @@ public class RecordAndMapActivity extends AppCompatActivity {
         mapFragment = new MapFragment();
         mapFragment.setCallBackMap(callBack_map);
         getSupportFragmentManager().beginTransaction().add(R.id.frame2, mapFragment).commit();
+
+
 
     }
 
@@ -53,7 +64,14 @@ public class RecordAndMapActivity extends AppCompatActivity {
     CallBack_Map callBack_map = new CallBack_Map() {
         @Override
         public void mapClicked(double lat, double lon) {
-            //listFragment.setTitle("City");
         }
     };
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+        LatLng mark = new LatLng(32.104236455127015, 34.87987851707526);
+        map.addMarker(new MarkerOptions().position(mark).title("I am here"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(mark));
+    }
 }

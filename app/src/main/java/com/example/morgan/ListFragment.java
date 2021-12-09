@@ -1,5 +1,6 @@
 package com.example.morgan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ public class ListFragment extends Fragment {
     private MyDB myDB;
     private CallBack_List callBackList;
     private MaterialTextView[] records = new MaterialTextView[10];
+    private MapFragment map = new MapFragment();
 
     public void setCallBackList(CallBack_List callBackList) {
         this.callBackList = callBackList;
@@ -47,7 +49,7 @@ public class ListFragment extends Fragment {
         list_LBL_title.setText(str);
     }
 
-//    private void initViews() {
+    private void initViews() {
 //        View.OnClickListener listener = new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -56,7 +58,14 @@ public class ListFragment extends Fragment {
 //            }
 //        };
 //        list_BTN_enter.setOnClickListener(listener);
+//        records[0].setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//               map.onClicked(myDB.getRecords().get(0));
+//            }
+//        });
 //    }
+    }
 
     private void findViews(View view) {
         list_LBL_title = view.findViewById(R.id.list_LBL_title);
