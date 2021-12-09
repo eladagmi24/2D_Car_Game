@@ -291,19 +291,22 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Timetick", "Tick: " + clock + "On Thread: " + Thread.currentThread().getName());
                 runOnUiThread(() -> {
                     Log.d("Timetick", "Tick: " + clock + "On Thread: " + Thread.currentThread().getName());
-                    updateRocks();
+                    if(countHearts < 0)
+                        finishGame();
+                    else
+                        updateRocks();
                     if(clock >= 1)
                         updateCoins();
                     odometer.setText(String.valueOf(clock));
                     coinsText.setText(String.valueOf(coinsCounter));
-                    if(countHearts < 0)
-                        finishGame();
+
                 });
             }
         }, 0, DELAY);
     }
 
     private void finishGame() {
+        timer.cancel();
         Record record = new Record();
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
