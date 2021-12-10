@@ -16,7 +16,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class RecordAndMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-   // private ListFragment listFragment;
     private MapFragment mapFragment;
     private String distance, coins;
     private TextView info;

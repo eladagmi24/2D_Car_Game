@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,7 +15,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.button.MaterialButton;
-import com.google.gson.Gson;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -35,9 +33,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         SupportMapFragment mapFragment = SupportMapFragment.newInstance();
         getChildFragmentManager().beginTransaction().replace(R.id.google_map, mapFragment).commit();
         mapFragment.getMapAsync(this);
-
-
-
         return view;
     }
     private void findViews(View view) {
@@ -50,14 +45,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         map.addMarker(new MarkerOptions().position(mark).title("I am here"));
         map.moveCamera(CameraUpdateFactory.newLatLng(mark));
     }
-//    private void moveCamera(Record record) {
-//        LatLng mark = new LatLng(record.getLat(), record.getLon());
-//        map.addMarker(new MarkerOptions().position(mark).title("I am here"));
-//        map.moveCamera(CameraUpdateFactory.
-//                newLatLngZoom(mark,1));
-//    }
-//    public void onClicked(Record record) {
-//        moveCamera(record);
-//    }
+    private void moveCameraByRecord (Record record) {
+        LatLng mark = new LatLng(record.getLat(), record.getLon());
+        map.addMarker(new MarkerOptions().position(mark).title("I am here"));
+        map.moveCamera(CameraUpdateFactory.
+                newLatLngZoom(mark,1));
+
+    }
+    public void onClicked(Record record) {
+        moveCameraByRecord(record);
+    }
 
 }

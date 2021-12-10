@@ -2,6 +2,7 @@ package com.example.morgan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class ListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
         findViews(view);
-        //initViews();
+        initViews();
         Bundle bundle = this.getArguments();
         String fromJSON = bundle.getString("myDB");
         myDB = new Gson().fromJson(fromJSON,MyDB.class);
@@ -50,22 +51,15 @@ public class ListFragment extends Fragment {
     }
 
     private void initViews() {
-//        View.OnClickListener listener = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (callBackList != null)
-//                    callBackList.setMainTitle(getName());
-//            }
-//        };
-//        list_BTN_enter.setOnClickListener(listener);
-//        records[0].setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//               map.onClicked(myDB.getRecords().get(0));
-//            }
-//        });
-//    }
+        records[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               map.onClicked(myDB.getRecords().get(0));
+               Log.d("myDB", " " + myDB.getRecords().get(0).getScore());
+            }
+        });
     }
+
 
     private void findViews(View view) {
         list_LBL_title = view.findViewById(R.id.list_LBL_title);
