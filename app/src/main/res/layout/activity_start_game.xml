@@ -11,19 +11,20 @@
         android:id="@+id/main_TXT_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="140dp"
         android:layout_marginTop="300dp"
         android:text="RACE"
         android:textColor="#B11B1B"
         android:textSize="48sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/main_TXT_recordsAndMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="400dp"
-        android:text="RECORD AND MAP"
+        android:text="RECORDS AND MAP"
         android:textColor="#1B1B1B"
         android:textSize="30sp"
         android:textStyle="bold" />

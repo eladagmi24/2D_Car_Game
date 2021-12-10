@@ -19,7 +19,6 @@ import com.google.android.material.textview.MaterialTextView;
 import com.google.gson.Gson;
 
 public class ListFragment extends Fragment {
-    private MaterialTextView list_LBL_title;
     private MyDB myDB;
     private CallBack_List callBackList;
     private MaterialTextView[] records = new MaterialTextView[10];
@@ -36,8 +35,12 @@ public class ListFragment extends Fragment {
 
         findViews(view);
         initViews();
-        Bundle bundle = this.getArguments();
-        String fromJSON = bundle.getString("myDB");
+        String fromJSON = MSPv3.getInstance(getContext().getApplicationContext()).getStringSP("MY_DB","");
+        myDB = new Gson().fromJson(fromJSON,MyDB.class);
+        if(myDB == null)
+            myDB = new MyDB();
+//        Bundle bundle = this.getArguments();
+//        String fromJSON = bundle.getString("myDB");
         myDB = new Gson().fromJson(fromJSON, MyDB.class);
         for (int i = 0; i < records.length; i++)
             if (i < myDB.getRecords().size())
@@ -45,9 +48,6 @@ public class ListFragment extends Fragment {
         return view;
     }
 
-    public void setTitle(String str) {
-        list_LBL_title.setText(str);
-    }
 
     private void initViews() {
         for (int i = 0; i < records.length; i++) {
@@ -65,7 +65,6 @@ public class ListFragment extends Fragment {
 
 
     private void findViews(View view) {
-        list_LBL_title = view.findViewById(R.id.list_LBL_title);
         records[0] = view.findViewById(R.id.list_LBL_record1);
         records[1] = view.findViewById(R.id.list_LBL_record2);
         records[2] = view.findViewById(R.id.list_LBL_record3);

@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.Image;
@@ -25,6 +29,7 @@ import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,6 +57,30 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer player, coin, backgrounds;
     private TextView odometer, coinsText;
     private int coinsCounter = 0;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    public enum DirectionAction {
+        LEFT,RIGHT
+    }
+    private SensorEventListener accSensorEventListener = new SensorEventListener() {
+        public void onSensorChanged(SensorEvent event) {
+            float x = event.values[0];
+            if (x <= -0.5) {
+                DirectionAction action = DirectionAction.LEFT;
+                move(action);
+            } else if (x >= 0.5) {
+                DirectionAction action = DirectionAction.RIGHT;
+                move(action);
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
+
+
 
     public void hideSystemUI() {
         if (getSupportActionBar() != null) {
@@ -72,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         hideSystemUI();
         setContentView(R.layout.activity_main);
-
+        initSensor();
         createGame();
         cars[countCars].setVisibility(View.VISIBLE);
         right = findViewById(R.id.main_BTN_right);
@@ -126,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private void createGame() {
         String fromJSON = MSPv3.getInstance(this).getStringSP("MY_DB","");
@@ -640,5 +671,70 @@ public class MainActivity extends AppCompatActivity {
         return num;
     }
 
+    //Sensors
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(accSensorEventListener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(accSensorEventListener);
+    }
+
+    private void initSensor() {
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    }
+
+    public boolean isSensorExists(int sensorType) {
+        return (sensorManager.getDefaultSensor(sensorType) != null);
+    }
+
+    private void move(DirectionAction action) {
+        if (action == DirectionAction.RIGHT) {
+            if (countCars < 4) {
+                cars[countCars].setVisibility(View.GONE);
+                cars[++countCars].setVisibility(View.VISIBLE);
+                if (rocks[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
+                    vibrate();
+                    toast("Ouch!");
+                    rocks[9][countCars].setVisibility(View.GONE);
+                    explosion[countCars].setVisibility(View.VISIBLE);
+                    cars[countCars].setVisibility(View.GONE);
+                    hearts[countHearts--].setVisibility(View.INVISIBLE);
+                    player.start();
+                    if (coins[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
+                        vibrate();
+                        toast("WOW!");
+                        coins[9][countCars].setVisibility(View.GONE);
+                        coin.start();
+                        coinsCounter++;
+                    }
+                }
+            }
+        } else if (countCars > 0) {
+            cars[countCars].setVisibility(View.GONE);
+            cars[--countCars].setVisibility(View.VISIBLE);
+            if (rocks[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
+                vibrate();
+                toast("Ouch!");
+                rocks[9][countCars].setVisibility(View.GONE);
+                explosion[countCars].setVisibility(View.VISIBLE);
+                cars[countCars].setVisibility(View.GONE);
+                hearts[countHearts--].setVisibility(View.INVISIBLE);
+                player.start();
+            }
+            if (coins[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
+                vibrate();
+                toast("WOW!");
+                coins[9][countCars].setVisibility(View.GONE);
+                coin.start();
+                coinsCounter++;
+            }
+        }
+    }
 
 }

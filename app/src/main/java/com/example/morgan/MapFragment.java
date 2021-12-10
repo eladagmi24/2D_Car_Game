@@ -28,14 +28,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
-        findViews(view);
         SupportMapFragment mapFragment = SupportMapFragment.newInstance();
         getChildFragmentManager().beginTransaction().replace(R.id.google_map, mapFragment).commit();
         mapFragment.getMapAsync(this);
         return view;
-    }
-    private void findViews(View view) {
-//        frame2_BTN_map = view.findViewById(R.id.map_BTN_map);
     }
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
@@ -43,15 +39,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         LatLng mark = new LatLng(32.104236455127015, 34.87987851707526);
         map.addMarker(new MarkerOptions().position(mark).title("I am here"));
         map.moveCamera(CameraUpdateFactory.newLatLng(mark));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(32.104236455127015, 34.87987851707526), 20.0f));
     }
     private void moveCameraByRecord (Record record) {
         LatLng mark = new LatLng(record.getLat(), record.getLon());
         map.addMarker(new MarkerOptions().position(mark).title("I am here"));
         map.moveCamera(CameraUpdateFactory.
                 newLatLngZoom(mark,1));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(record.getLat(), record.getLon()), 20.0f));
+
 
     }
     public void onClicked(Record record) {
-        moveCameraByRecord(record);
+        if(record != null)
+            moveCameraByRecord(record);
     }
 }
