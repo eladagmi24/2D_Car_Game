@@ -1,5 +1,4 @@
 package com.example.morgan;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,5 +54,4 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onClicked(Record record) {
         moveCameraByRecord(record);
     }
-
 }

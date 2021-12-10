@@ -13,6 +13,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class RecordAndMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -40,7 +44,6 @@ public class RecordAndMapActivity extends AppCompatActivity implements OnMapRead
         getSupportFragmentManager().beginTransaction().add(R.id.frame2, mapFragment).commit();
 
 
-
     }
 
     CallBack_List callBack_List = new CallBack_List() {
@@ -56,13 +59,21 @@ public class RecordAndMapActivity extends AppCompatActivity implements OnMapRead
 
         @Override
         public void rowSelected(int i) {
-
+            String fromJSON = MSPv3.getInstance(getApplicationContext()).getStringSP("MY_DB","");
+            MyDB myDB = new Gson().fromJson(fromJSON,MyDB.class);
+            Record record = myDB.getRecords().get(i);
+            callBack_map.locationSelected(record);
         }
     };
 
     CallBack_Map callBack_map = new CallBack_Map() {
         @Override
         public void mapClicked(double lat, double lon) {
+        }
+
+        @Override
+        public void locationSelected(Record record) {
+            mapFragment.onClicked(record);
         }
     };
 

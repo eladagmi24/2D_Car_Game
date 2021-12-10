@@ -23,7 +23,6 @@ public class ListFragment extends Fragment {
     private MyDB myDB;
     private CallBack_List callBackList;
     private MaterialTextView[] records = new MaterialTextView[10];
-    private MapFragment map = new MapFragment();
 
     public void setCallBackList(CallBack_List callBackList) {
         this.callBackList = callBackList;
@@ -39,8 +38,8 @@ public class ListFragment extends Fragment {
         initViews();
         Bundle bundle = this.getArguments();
         String fromJSON = bundle.getString("myDB");
-        myDB = new Gson().fromJson(fromJSON,MyDB.class);
-        for(int i = 0; i < records.length; i++)
+        myDB = new Gson().fromJson(fromJSON, MyDB.class);
+        for (int i = 0; i < records.length; i++)
             if (i < myDB.getRecords().size())
                 records[i].setText(myDB.getRecords().get(i).toString());
         return view;
@@ -51,13 +50,17 @@ public class ListFragment extends Fragment {
     }
 
     private void initViews() {
-        records[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               map.onClicked(myDB.getRecords().get(0));
-               Log.d("myDB", " " + myDB.getRecords().get(0).getScore());
-            }
-        });
+        for (int i = 0; i < records.length; i++) {
+
+            final int finI = i;
+            records[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBackList.rowSelected(finI);
+                    Log.d("myDB", " " + myDB.getRecords().get(finI).getScore());
+                }
+            });
+        }
     }
 
 
