@@ -30,21 +30,11 @@
         android:textStyle="bold" />
 
     <CheckBox
-        android:id="@+id/main_BOX_switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="550dp"
-        android:text="MUSIC"
-        android:textColor="#00228A"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-    <CheckBox
         android:id="@+id/main_BOX_switch2"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="550dp"
         android:text="SENSORS MODE"
         android:textColor="#00228A"
         android:textSize="20sp"

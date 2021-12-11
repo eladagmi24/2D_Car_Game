@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class StartGameActivity extends AppCompatActivity {
     private TextView text, recordsAndMap;
-    private CheckBox music, sensors;
+    private CheckBox sensors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,6 @@ public class StartGameActivity extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
-        music = findViewById(R.id.main_BOX_switch1);
         sensors = (CheckBox)findViewById(R.id.main_BOX_switch2);
         text = findViewById(R.id.main_TXT_play);
         recordsAndMap = findViewById(R.id.main_TXT_recordsAndMap);

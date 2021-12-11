@@ -54,7 +54,7 @@ public class MainActivityArrows extends AppCompatActivity {
     private int oneJump = 0;
     private int i = -1, j = -1, k = -1, g = -1, h = -1;
     private int coinsIndex = -1, coinsIndex1 = -1;
-    private MediaPlayer player, coin, backgrounds;
+    private MediaPlayer player, coin;
     private TextView odometer, coinsText;
     private int coinsCounter = 0;
 //    private SensorManager sensorManager;
@@ -170,8 +170,6 @@ public class MainActivityArrows extends AppCompatActivity {
         createCoins();
         player = MediaPlayer.create(this, R.raw.explosion);
         coin = MediaPlayer.create(this, R.raw.coins);
-        backgrounds = MediaPlayer.create(this, R.raw.background);
-        backgrounds.start();
         odometer = findViewById(R.id.main_TXT_odometer);
         coinsText = findViewById(R.id.main_TXT_coinsCounter);
 
@@ -341,7 +339,6 @@ public class MainActivityArrows extends AppCompatActivity {
         Record record = new Record();
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        backgrounds.stop();
         Log.d("size", "" + myDB.getRecords().size());
         if (myDB.getRecords().size() == 0) {
             record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());

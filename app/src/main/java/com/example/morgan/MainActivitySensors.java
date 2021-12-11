@@ -35,10 +35,10 @@ public class MainActivitySensors extends AppCompatActivity {
     private ImageView[] hearts = new ImageView[3];
     private int countHearts = 2;
     private int countCars = 2;
-   private ImageButton left, right;
+    private ImageButton left, right;
     private ImageView[][] rocks = new ImageView[10][5];
     private ImageView[][] coins = new ImageView[10][5];
-    private static final int DELAY = 1000;
+    private static  int DELAY = 1000;
     private int clock = 0;
     private Timer timer;
     private int num, num1, num2, num3, num4, min = 0, max = 5;
@@ -59,13 +59,20 @@ public class MainActivitySensors extends AppCompatActivity {
     private SensorEventListener accSensorEventListener = new SensorEventListener() {
         public void onSensorChanged(SensorEvent event) {
             float x = event.values[0];
-            if (x <= -0.5) {
-                DirectionAction action = DirectionAction.LEFT;
-                move(action);
-            } else if (x >= 0.5) {
+            float z = event.values[2];
+            if (x <= -0.7) {
                 DirectionAction action = DirectionAction.RIGHT;
                 move(action);
+            } else if (x >= 0.7) {
+                DirectionAction action = DirectionAction.LEFT;
+                move(action);
             }
+            if (z <= -4) {
+                DELAY += 500;
+            } else if (z >= 4) {
+                DELAY -= 500;
+            }
+            Log.d("delay", "" + DELAY);
         }
 
         @Override
