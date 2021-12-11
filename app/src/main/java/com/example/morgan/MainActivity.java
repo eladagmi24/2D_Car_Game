@@ -29,7 +29,7 @@ import com.google.gson.Gson;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivitySensors extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     //Data base
     private MyDB myDB;
@@ -107,10 +107,8 @@ public class MainActivitySensors extends AppCompatActivity {
                             move(action);
                         }
                     }
-
                     @Override
                     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
                     }
                 };
                 right = findViewById(R.id.main_BTN_right);
@@ -334,10 +332,6 @@ public class MainActivitySensors extends AppCompatActivity {
     }
     private void startTicker() {
         timer = new Timer();
-        setTimer();
-    }
-
-    private void setTimer() {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -597,8 +591,7 @@ public class MainActivitySensors extends AppCompatActivity {
 
     }
 
-    private void updateCoins()
-    {
+    private void updateCoins() {
         if (startCoins && oneJump == 1) {
             coinsNum = setRandom();
             startCoins = false;

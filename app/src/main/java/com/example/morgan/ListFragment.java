@@ -30,17 +30,13 @@ public class ListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-
         findViews(view);
         initViews();
         String fromJSON = MSPv3.getInstance(getContext().getApplicationContext()).getStringSP("MY_DB","");
         myDB = new Gson().fromJson(fromJSON,MyDB.class);
         if(myDB == null)
             myDB = new MyDB();
-//        Bundle bundle = this.getArguments();
-//        String fromJSON = bundle.getString("myDB");
         myDB = new Gson().fromJson(fromJSON, MyDB.class);
         for (int i = 0; i < records.length; i++)
             if (i < myDB.getRecords().size())

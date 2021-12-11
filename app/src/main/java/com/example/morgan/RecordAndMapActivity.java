@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ import java.util.Comparator;
 public class RecordAndMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private MapFragment mapFragment;
-    private TextView info;
+    private TextView homeScreen;
     private GoogleMap map;
 
     @Override
@@ -30,7 +31,7 @@ public class RecordAndMapActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_and_map);
 
-        info = findViewById(R.id.info);
+        homeScreen = findViewById(R.id.list_TXT_homeScreen);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("myDB");
@@ -42,6 +43,12 @@ public class RecordAndMapActivity extends AppCompatActivity implements OnMapRead
         mapFragment = new MapFragment();
         mapFragment.setCallBackMap(callBack_map);
         getSupportFragmentManager().beginTransaction().add(R.id.frame2, mapFragment).commit();
+        homeScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RecordAndMapActivity.this, StartGameActivity.class));
+            }
+        });
 
 
     }
@@ -49,12 +56,12 @@ public class RecordAndMapActivity extends AppCompatActivity implements OnMapRead
     CallBack_List callBack_List = new CallBack_List() {
         @Override
         public void setMainTitle(String str) {
-            info.setText(str);
+            homeScreen.setText(str);
         }
 
         @Override
         public void setMainTitleColor(int color) {
-            info.setTextColor(color);
+            homeScreen.setTextColor(color);
         }
 
         @Override

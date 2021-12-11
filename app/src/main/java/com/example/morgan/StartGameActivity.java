@@ -35,7 +35,7 @@ public class StartGameActivity extends AppCompatActivity {
             text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent mainIntent = new Intent(StartGameActivity.this, MainActivitySensors.class);
+                    Intent mainIntent = new Intent(StartGameActivity.this, MainActivity.class);
                     if(sensors.isChecked()) {
                         mainIntent.putExtra(MODE, "sensors");
                         startActivity(mainIntent);

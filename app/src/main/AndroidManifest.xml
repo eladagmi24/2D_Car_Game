@@ -39,7 +39,7 @@
             android:name=".MainActivityArrows"
             android:exported="false" />
         <activity
-            android:name=".MainActivitySensors"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".StartGameActivity"
