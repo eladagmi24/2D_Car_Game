@@ -1,4 +1,4 @@
-package com.example.morgan;
+package com.example.morgan.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
+
+import com.example.morgan.R;
 
 public class SplashActivity extends AppCompatActivity {
 

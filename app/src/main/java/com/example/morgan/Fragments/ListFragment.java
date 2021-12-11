@@ -1,20 +1,18 @@
-package com.example.morgan;
+package com.example.morgan.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputLayout;
+import com.example.morgan.CallBacks.CallBack_List;
+import com.example.morgan.DataBase.MSPv3;
+import com.example.morgan.DataBase.MyDB;
+import com.example.morgan.R;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.gson.Gson;
 

@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Morgan">
         <activity
-            android:name=".StartGameActivity"
+            android:name=".Activities.StartGameActivity"
             android:exported="false" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -34,13 +34,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".RecordAndMapActivity"
+            android:name=".Activities.RecordAndMapActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".Activities.SplashActivity"
             android:exported="true">
 
             <intent-filter>

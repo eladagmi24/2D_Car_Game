@@ -1,6 +1,6 @@
-package com.example.morgan;
+package com.example.morgan.Activities;
 
-import static com.example.morgan.StartGameActivity.MODE;
+import static com.example.morgan.Activities.StartGameActivity.MODE;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +24,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.morgan.DataBase.MSPv3;
+import com.example.morgan.DataBase.MyDB;
+import com.example.morgan.R;
 import com.google.gson.Gson;
 
 import java.util.Timer;

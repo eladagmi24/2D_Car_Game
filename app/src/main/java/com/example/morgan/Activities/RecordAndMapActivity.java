@@ -1,24 +1,25 @@
-package com.example.morgan;
+package com.example.morgan.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.example.morgan.CallBacks.CallBack_List;
+import com.example.morgan.CallBacks.CallBack_Map;
+import com.example.morgan.Fragments.ListFragment;
+import com.example.morgan.DataBase.MSPv3;
+import com.example.morgan.Fragments.MapFragment;
+import com.example.morgan.DataBase.MyDB;
+import com.example.morgan.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.Comparator;
 
 public class RecordAndMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 

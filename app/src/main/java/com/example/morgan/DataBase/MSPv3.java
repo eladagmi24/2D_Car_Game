@@ -1,4 +1,4 @@
-package com.example.morgan;
+package com.example.morgan.DataBase;
 
 import android.content.Context;
 import android.content.SharedPreferences;

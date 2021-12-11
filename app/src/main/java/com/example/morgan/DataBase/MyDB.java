@@ -1,7 +1,8 @@
-package com.example.morgan;
+package com.example.morgan.DataBase;
+
+import com.example.morgan.Activities.Record;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class MyDB {
