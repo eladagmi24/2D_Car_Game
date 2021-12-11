@@ -1,4 +1,4 @@
-package com.example.morgan;
+package com.example.morgan.Activities;
 
 public class Record implements Comparable<Record> {
     private int distance=0;

@@ -1,4 +1,4 @@
-package com.example.morgan;
+package com.example.morgan.Fragments;
 
 import android.os.Bundle;
 

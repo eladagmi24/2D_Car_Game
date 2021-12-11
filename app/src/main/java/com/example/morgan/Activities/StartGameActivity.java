@@ -1,4 +1,4 @@
-package com.example.morgan;
+package com.example.morgan.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.example.morgan.R;
 
 public class StartGameActivity extends AppCompatActivity {
     private TextView text, recordsAndMap;

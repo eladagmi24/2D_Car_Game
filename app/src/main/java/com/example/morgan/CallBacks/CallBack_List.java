@@ -1,4 +1,4 @@
-package com.example.morgan;
+package com.example.morgan.CallBacks;
 
 public interface CallBack_List {
         void setMainTitle(String str);
