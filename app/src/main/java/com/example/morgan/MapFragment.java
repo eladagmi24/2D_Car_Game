@@ -17,10 +17,8 @@ import com.google.android.material.button.MaterialButton;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
-    private MaterialButton frame2_BTN_map;
     private CallBack_Map callBack_map;
     private GoogleMap map;
-    private MyDB myDB;
 
     public void setCallBackMap(CallBack_Map callBack_map) {
         this.callBack_map = callBack_map;

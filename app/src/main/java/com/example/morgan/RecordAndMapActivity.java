@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,7 +22,6 @@ import java.util.Comparator;
 public class RecordAndMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private MapFragment mapFragment;
-    private String distance, coins;
     private TextView info;
     private GoogleMap map;
 
@@ -61,8 +61,11 @@ public class RecordAndMapActivity extends AppCompatActivity implements OnMapRead
         public void rowSelected(int i) {
             String fromJSON = MSPv3.getInstance(getApplicationContext()).getStringSP("MY_DB","");
             MyDB myDB = new Gson().fromJson(fromJSON,MyDB.class);
-            Record record = myDB.getRecords().get(i);
-            callBack_map.locationSelected(record);
+            if(i < myDB.getRecords().size())
+            {
+                Record record = myDB.getRecords().get(i);
+                callBack_map.locationSelected(record);
+            }
         }
     };
 

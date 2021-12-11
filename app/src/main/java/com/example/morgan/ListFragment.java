@@ -57,7 +57,6 @@ public class ListFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     callBackList.rowSelected(finI);
-                    Log.d("myDB", " " + myDB.getRecords().get(finI).getScore());
                 }
             });
         }

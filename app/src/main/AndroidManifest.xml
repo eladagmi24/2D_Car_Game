@@ -36,7 +36,10 @@
             android:name=".RecordAndMapActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivityArrows"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivitySensors"
             android:exported="false" />
         <activity
             android:name=".StartGameActivity"
