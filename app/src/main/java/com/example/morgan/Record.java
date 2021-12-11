@@ -1,7 +1,6 @@
 package com.example.morgan;
 
-public class Record {
-//    private String name ="";
+public class Record implements Comparable<Record> {
     private int distance=0;
     private int coins=0;
     private double lat=0.0;
@@ -10,14 +9,6 @@ public class Record {
     public Record() {
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public Record setName(String name) {
-//        this.name = name;
-//        return this;
-//    }
 
     public int getDistance() {
         return distance;
@@ -59,8 +50,15 @@ public class Record {
         return this;
     }
 
+
+
     @Override
     public String toString() {
         return "Coins: " + coins + ", Distance: " + distance;
+    }
+
+    @Override
+    public int compareTo(Record r) {
+        return (int)(r.getScore() - this.getScore());
     }
 }

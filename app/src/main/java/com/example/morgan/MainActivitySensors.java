@@ -1,5 +1,7 @@
 package com.example.morgan;
 
+import static com.example.morgan.StartGameActivity.MODE;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -29,59 +31,44 @@ import java.util.TimerTask;
 
 public class MainActivitySensors extends AppCompatActivity {
 
+    //Data base
     private MyDB myDB;
+
+    //Game items
     private ImageView[] cars = new ImageView[5];
     private ImageView[] explosion = new ImageView[5];
     private ImageView[] hearts = new ImageView[3];
-    private int countHearts = 2;
-    private int countCars = 2;
-    private ImageButton left, right;
     private ImageView[][] rocks = new ImageView[10][5];
     private ImageView[][] coins = new ImageView[10][5];
-    private static  int DELAY = 1000;
-    private int clock = 0;
-    private Timer timer;
-    private int num, num1, num2, num3, num4, min = 0, max = 5;
+
+    //Indexes & Actions objects
+    private int[] arrNumbers = new int[5];
+    private int[] arrIndexes = new int[5];
+    private boolean[] arrOnStart = new boolean[5];
+    int min = 0, max = 5;
+    private int countHearts = 2;
+    private int countCars = 2;
+    private int coinsIndex = -1, coinsIndex1 = -1, coinsCounter = 0;
     private int coinsNum, coinsNum1;
-    private boolean onStart = true, onStart1 = true, onStart2 = true, onStart3 = true, onStart4 = true;
     private boolean startCoins = true, startCoins1 = true;
     private int oneJump = 0;
-    private int i = -1, j = -1, k = -1, g = -1, h = -1;
-    private int coinsIndex = -1, coinsIndex1 = -1;
-    private MediaPlayer player, coin, backgrounds;
+
+    //Time
+    private static  int DELAY = 1000;
+    private Timer timer;
+    private int clock = 0;
+
+    //Buttons, Texts and sensors
+    private ImageButton left, right;
+    private MediaPlayer player, coin;
     private TextView odometer, coinsText;
-    private int coinsCounter = 0;
     private SensorManager sensorManager;
     private Sensor sensor;
+    private SensorEventListener accSensorEventListener;
+    private String mode = "";
     public enum DirectionAction {
         LEFT,RIGHT
     }
-    private SensorEventListener accSensorEventListener = new SensorEventListener() {
-        public void onSensorChanged(SensorEvent event) {
-            float x = event.values[0];
-            float z = event.values[2];
-            if (x <= -0.7) {
-                DirectionAction action = DirectionAction.RIGHT;
-                move(action);
-            } else if (x >= 0.7) {
-                DirectionAction action = DirectionAction.LEFT;
-                move(action);
-            }
-            if (z <= -4) {
-                DELAY += 500;
-            } else if (z >= 4) {
-                DELAY -= 500;
-            }
-            Log.d("delay", "" + DELAY);
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-        }
-    };
-
-
 
     public void hideSystemUI() {
         if (getSupportActionBar() != null) {
@@ -100,68 +87,99 @@ public class MainActivitySensors extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        right = findViewById(R.id.main_BTN_right);
-        right.setVisibility(View.GONE);
-        left = findViewById(R.id.main_BTN_left);
-        left.setVisibility(View.GONE);
+        initArrays();
         hideSystemUI();
-        initSensor();
         createGame();
-//        cars[countCars].setVisibility(View.VISIBLE);
-//        right = findViewById(R.id.main_BTN_right);
-//        right.setOnClickListener(v -> {
-//
-//            if (countCars < 4) {
-//                cars[countCars].setVisibility(View.GONE);
-//                cars[++countCars].setVisibility(View.VISIBLE);
-//                if (rocks[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
-//                    vibrate();
-//                    toast("Ouch!");
-//                    rocks[9][countCars].setVisibility(View.GONE);
-//                    explosion[countCars].setVisibility(View.VISIBLE);
-//                    cars[countCars].setVisibility(View.GONE);
-//                    hearts[countHearts--].setVisibility(View.INVISIBLE);
-//                    player.start();
-//                }
-//                if (coins[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
-//                    vibrate();
-//                    toast("WOW!");
-//                    coins[9][countCars].setVisibility(View.GONE);
-//                    coin.start();
-//                    coinsCounter++;
-//                }
-//            }
-//
-//        });
-//        left = findViewById(R.id.main_BTN_left);
-//        left.setOnClickListener(v -> {
-//            if (countCars > 0) {
-//                cars[countCars].setVisibility(View.GONE);
-//                cars[--countCars].setVisibility(View.VISIBLE);
-//                if (rocks[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
-//                    vibrate();
-//                    toast("Ouch!");
-//                    rocks[9][countCars].setVisibility(View.GONE);
-//                    explosion[countCars].setVisibility(View.VISIBLE);
-//                    cars[countCars].setVisibility(View.GONE);
-//                    hearts[countHearts--].setVisibility(View.INVISIBLE);
-//                    player.start();
-//                }
-//                if (coins[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
-//                    vibrate();
-//                    toast("WOW!");
-//                    coins[9][countCars].setVisibility(View.GONE);
-//                    coin.start();
-//                    coinsCounter++;
-//                }
-//            }
-//
-//        });
+        if(getIntent() != null){
+            Intent intent = getIntent();
+            mode = intent.getStringExtra(MODE);
+            if(mode.equals("sensors")){
+                initSensor();
+                accSensorEventListener = new SensorEventListener() {
+                    public void onSensorChanged(SensorEvent event) {
+                        float x = event.values[0];
+                        float z = event.values[2];
+                        if (x <= -0.7) {
+                            DirectionAction action = DirectionAction.RIGHT;
+                            move(action);
+                        } else if (x >= 0.7) {
+                            DirectionAction action = DirectionAction.LEFT;
+                            move(action);
+                        }
+                    }
+
+                    @Override
+                    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+                    }
+                };
+                right = findViewById(R.id.main_BTN_right);
+                right.setVisibility(View.GONE);
+                left = findViewById(R.id.main_BTN_left);
+                left.setVisibility(View.GONE);
+            } else {
+                cars[countCars].setVisibility(View.VISIBLE);
+                right = findViewById(R.id.main_BTN_right);
+                right.setOnClickListener(v -> {
+
+                    if (countCars < 4) {
+                        cars[countCars].setVisibility(View.GONE);
+                        cars[++countCars].setVisibility(View.VISIBLE);
+                        if (rocks[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
+                            vibrate();
+                            toast("Ouch!");
+                            rocks[9][countCars].setVisibility(View.GONE);
+                            explosion[countCars].setVisibility(View.VISIBLE);
+                            cars[countCars].setVisibility(View.GONE);
+                            hearts[countHearts--].setVisibility(View.INVISIBLE);
+                            player.start();
+                        }
+                        if (coins[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
+                            vibrate();
+                            toast("WOW!");
+                            coins[9][countCars].setVisibility(View.GONE);
+                            coin.start();
+                            coinsCounter++;
+                        }
+                    }
+
+                });
+                left = findViewById(R.id.main_BTN_left);
+                left.setOnClickListener(v -> {
+                    if (countCars > 0) {
+                        cars[countCars].setVisibility(View.GONE);
+                        cars[--countCars].setVisibility(View.VISIBLE);
+                        if (rocks[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
+                            vibrate();
+                            toast("Ouch!");
+                            rocks[9][countCars].setVisibility(View.GONE);
+                            explosion[countCars].setVisibility(View.VISIBLE);
+                            cars[countCars].setVisibility(View.GONE);
+                            hearts[countHearts--].setVisibility(View.INVISIBLE);
+                            player.start();
+                        }
+                        if (coins[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
+                            vibrate();
+                            toast("WOW!");
+                            coins[9][countCars].setVisibility(View.GONE);
+                            coin.start();
+                            coinsCounter++;
+                        }
+                    }
+
+                });
+            }
+        }
+
 
     }
 
-
-
+    private void initArrays() {
+        for(int i = 0; i < arrIndexes.length; i++)
+            arrIndexes[i] = -1;
+        for(int i = 0; i < arrOnStart.length; i++)
+            arrOnStart[i] = true;
+    }
     private void createGame() {
         String fromJSON = MSPv3.getInstance(this).getStringSP("MY_DB","");
         myDB = new Gson().fromJson(fromJSON,MyDB.class);
@@ -174,8 +192,6 @@ public class MainActivitySensors extends AppCompatActivity {
         createCoins();
         player = MediaPlayer.create(this, R.raw.explosion);
         coin = MediaPlayer.create(this, R.raw.coins);
-        backgrounds = MediaPlayer.create(this, R.raw.background);
-        backgrounds.start();
         odometer = findViewById(R.id.main_TXT_odometer);
         coinsText = findViewById(R.id.main_TXT_coinsCounter);
 
@@ -316,9 +332,12 @@ public class MainActivitySensors extends AppCompatActivity {
         super.onStart();
         startTicker();
     }
-
     private void startTicker() {
         timer = new Timer();
+        setTimer();
+    }
+
+    private void setTimer() {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -345,7 +364,6 @@ public class MainActivitySensors extends AppCompatActivity {
         Record record = new Record();
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        backgrounds.stop();
         Log.d("size", "" + myDB.getRecords().size());
         if (myDB.getRecords().size() == 0) {
             record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
@@ -358,7 +376,7 @@ public class MainActivitySensors extends AppCompatActivity {
             record.setDistance(clock).setCoins(coinsCounter).setLat(location.getLatitude()).setLon(location.getLongitude());
             myDB.getRecords().set(myDB.getRecords().size() - 1, record);
         }
-        sortMyDB(myDB);
+        myDB.sortRecords();
 
 
         Intent intent = new Intent(this, RecordAndMapActivity.class);
@@ -370,17 +388,6 @@ public class MainActivitySensors extends AppCompatActivity {
         finish();
         startActivity(intent);
     }
-
-    private void sortMyDB(MyDB myDB) {
-        Record tempRecord;
-        for(int i = myDB.getRecords().size() - 1; i >= 0; i--)
-            if(i >= 1 && myDB.getRecords().get(i).getScore() > myDB.getRecords().get(i - 1).getScore()) {
-                tempRecord = myDB.getRecords().get(i - 1);
-                myDB.getRecords().set(i - 1, myDB.getRecords().get(i));
-                myDB.getRecords().set(i, tempRecord);
-            }
-    }
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -395,195 +402,195 @@ public class MainActivitySensors extends AppCompatActivity {
 
     private void updateRocks() {
         ++clock;
-        if (onStart) {
-            num = setRandom();
-            onStart = false;
+        if (arrOnStart[0]) {
+            arrNumbers[0] = setRandom();
+            arrOnStart[0] = false;
             oneJump = 0;
         }
-        if (!onStart) {
-            if (i < 9) {
-                if (i == -1) {
-                    rocks[++i][num].setVisibility(View.VISIBLE);
+        if (!arrOnStart[0]) {
+            if (arrIndexes[0] < 9) {
+                if (arrIndexes[0] == -1) {
+                    rocks[++arrIndexes[0]][ arrNumbers[0]].setVisibility(View.VISIBLE);
                 } else {
-                    if (i == 8 && num == countCars) {
+                    if (arrIndexes[0] == 8 &&  arrNumbers[0] == countCars) {
                         vibrate();
                         toast("Ouch!");
-                        rocks[i][num].setVisibility(View.GONE);
-                        explosion[num].setVisibility(View.VISIBLE);
-                        cars[num].setVisibility(View.GONE);
-                        i++;
+                        rocks[arrIndexes[0]][arrNumbers[0]].setVisibility(View.GONE);
+                        explosion[arrNumbers[0]].setVisibility(View.VISIBLE);
+                        cars[ arrNumbers[0]].setVisibility(View.GONE);
+                        arrIndexes[0]++;
                         hearts[countHearts--].setVisibility(View.INVISIBLE);
                         player.start();
                     } else {
-                        rocks[i][num].setVisibility(View.GONE);
-                        rocks[++i][num].setVisibility(View.VISIBLE);
+                        rocks[arrIndexes[0]][arrNumbers[0]].setVisibility(View.GONE);
+                        rocks[++arrIndexes[0]][arrNumbers[0]].setVisibility(View.VISIBLE);
                     }
                     oneJump++;
                 }
             } else {
 
-                rocks[i][num].setVisibility(View.GONE);
-                explosion[num].setVisibility(View.GONE);
+                rocks[arrIndexes[0]][arrNumbers[0]].setVisibility(View.GONE);
+                explosion[arrNumbers[0]].setVisibility(View.GONE);
                 cars[countCars].setVisibility(View.VISIBLE);
-                num = setRandom();
-                i = 0;
-                rocks[i][num].setVisibility(View.VISIBLE);
+                arrNumbers[0] = setRandom();
+                arrIndexes[0] = 0;
+                rocks[arrIndexes[0]][arrNumbers[0]].setVisibility(View.VISIBLE);
 
 
             }
         }
 
-        if (onStart1 && oneJump == 2) {
-            num1 = setRandom();
-            onStart1 = false;
+        if (arrOnStart[1] && oneJump == 2) {
+            arrNumbers[1] = setRandom();
+            arrOnStart[1] = false;
         }
-        if (!onStart1) {
-            if (j < 9) {
+        if (!arrOnStart[1]) {
+            if (arrIndexes[1] < 9) {
 
-                if (j == -1) {
-                    rocks[++j][num1].setVisibility(View.VISIBLE);
+                if (arrIndexes[1] == -1) {
+                    rocks[++arrIndexes[1]][arrNumbers[1]].setVisibility(View.VISIBLE);
 
                 } else {
-                    if (j == 8 && num1 == countCars) {
+                    if (arrIndexes[1] == 8 && arrNumbers[1] == countCars) {
                         vibrate();
                         toast("Ouch!");
-                        rocks[j][num1].setVisibility(View.GONE);
-                        explosion[num1].setVisibility(View.VISIBLE);
-                        cars[num1].setVisibility(View.GONE);
-                        j++;
+                        rocks[arrIndexes[1]][arrNumbers[1]].setVisibility(View.GONE);
+                        explosion[arrNumbers[1]].setVisibility(View.VISIBLE);
+                        cars[arrNumbers[1]].setVisibility(View.GONE);
+                        arrIndexes[1]++;
                         hearts[countHearts--].setVisibility(View.INVISIBLE);
                         player.start();
 
 
                     } else {
-                        rocks[j][num1].setVisibility(View.GONE);
-                        rocks[++j][num1].setVisibility(View.VISIBLE);
+                        rocks[arrIndexes[1]][arrNumbers[1]].setVisibility(View.GONE);
+                        rocks[++arrIndexes[1]][arrNumbers[1]].setVisibility(View.VISIBLE);
                     }
 
                 }
             } else {
-                rocks[j][num1].setVisibility(View.GONE);
-                explosion[num1].setVisibility(View.GONE);
+                rocks[arrIndexes[1]][arrNumbers[1]].setVisibility(View.GONE);
+                explosion[arrNumbers[1]].setVisibility(View.GONE);
                 cars[countCars].setVisibility(View.VISIBLE);
-                num1 = setRandom();
-                j = 0;
-                rocks[j][num1].setVisibility(View.VISIBLE);
+                arrNumbers[1] = setRandom();
+                arrIndexes[1] = 0;
+                rocks[arrIndexes[1]][arrNumbers[1]].setVisibility(View.VISIBLE);
 
             }
         }
 
-        if (onStart2 && oneJump == 4) {
-            num2 = setRandom();
-            onStart2 = false;
+        if (arrOnStart[2] && oneJump == 4) {
+            arrNumbers[2] = setRandom();
+            arrOnStart[2] = false;
         }
-        if (!onStart2) {
-            if (k < 9) {
-                if (k == -1) {
-                    rocks[++k][num2].setVisibility(View.VISIBLE);
+        if (!arrOnStart[2]) {
+            if (arrIndexes[2] < 9) {
+                if (arrIndexes[2] == -1) {
+                    rocks[++arrIndexes[2]][arrNumbers[2]].setVisibility(View.VISIBLE);
 
                 } else {
-                    if (k == 8 && num2 == countCars) {
+                    if (arrIndexes[2] == 8 && arrNumbers[2] == countCars) {
                         vibrate();
                         toast("Ouch!");
-                        rocks[k][num2].setVisibility(View.GONE);
-                        explosion[num2].setVisibility(View.VISIBLE);
-                        cars[num2].setVisibility(View.GONE);
-                        k++;
+                        rocks[arrIndexes[2]][arrNumbers[2]].setVisibility(View.GONE);
+                        explosion[arrNumbers[2]].setVisibility(View.VISIBLE);
+                        cars[arrNumbers[2]].setVisibility(View.GONE);
+                        arrIndexes[2]++;
                         hearts[countHearts--].setVisibility(View.INVISIBLE);
                         player.start();
 
                     } else {
-                        rocks[k][num2].setVisibility(View.GONE);
-                        rocks[++k][num2].setVisibility(View.VISIBLE);
-                    }
-
-
-                }
-
-            } else {
-                rocks[k][num2].setVisibility(View.GONE);
-                explosion[num2].setVisibility(View.GONE);
-                cars[countCars].setVisibility(View.VISIBLE);
-                num2 = setRandom();
-                k = 0;
-                rocks[k][num2].setVisibility(View.VISIBLE);
-
-            }
-        }
-
-        if (onStart3 && oneJump == 6) {
-            num3 = setRandom();
-            onStart3 = false;
-        }
-        if (!onStart3) {
-            if (g < 9) {
-                if (g == -1) {
-                    rocks[++g][num3].setVisibility(View.VISIBLE);
-
-                } else {
-                    if (g == 8 && num3 == countCars) {
-                        vibrate();
-                        toast("Ouch!");
-                        rocks[g][num3].setVisibility(View.GONE);
-                        explosion[num3].setVisibility(View.VISIBLE);
-                        cars[num3].setVisibility(View.GONE);
-                        g++;
-                        hearts[countHearts--].setVisibility(View.INVISIBLE);
-                        player.start();
-
-                    } else {
-                        rocks[g][num3].setVisibility(View.GONE);
-                        rocks[++g][num3].setVisibility(View.VISIBLE);
+                        rocks[arrIndexes[2]][arrNumbers[2]].setVisibility(View.GONE);
+                        rocks[++arrIndexes[2]][arrNumbers[2]].setVisibility(View.VISIBLE);
                     }
 
 
                 }
 
             } else {
-                rocks[g][num3].setVisibility(View.GONE);
-                explosion[num3].setVisibility(View.GONE);
+                rocks[arrIndexes[2]][arrNumbers[2]].setVisibility(View.GONE);
+                explosion[arrNumbers[2]].setVisibility(View.GONE);
                 cars[countCars].setVisibility(View.VISIBLE);
-                num3 = setRandom();
-                g = 0;
-                rocks[g][num3].setVisibility(View.VISIBLE);
+                arrNumbers[2] = setRandom();
+                arrIndexes[2] = 0;
+                rocks[arrIndexes[2]][arrNumbers[2]].setVisibility(View.VISIBLE);
 
             }
+        }
 
+        if (arrOnStart[3] && oneJump == 6) {
+            arrNumbers[3] = setRandom();
+            arrOnStart[3] = false;
         }
-        if (onStart4 && oneJump == 8) {
-            num4 = setRandom();
-            onStart4 = false;
-        }
-        if (!onStart4) {
-            if (h < 9) {
-                if (h == -1) {
-                    rocks[++h][num4].setVisibility(View.VISIBLE);
+        if (!arrOnStart[3]) {
+            if (arrIndexes[3] < 9) {
+                if (arrIndexes[3] == -1) {
+                    rocks[++arrIndexes[3]][arrNumbers[3]].setVisibility(View.VISIBLE);
 
                 } else {
-                    if (h == 8 && num4 == countCars) {
+                    if (arrIndexes[3] == 8 && arrNumbers[3] == countCars) {
                         vibrate();
                         toast("Ouch!");
-                        rocks[h][num4].setVisibility(View.GONE);
-                        explosion[num4].setVisibility(View.VISIBLE);
-                        cars[num4].setVisibility(View.GONE);
-                        h++;
+                        rocks[arrIndexes[3]][arrNumbers[3]].setVisibility(View.GONE);
+                        explosion[arrNumbers[3]].setVisibility(View.VISIBLE);
+                        cars[arrNumbers[3]].setVisibility(View.GONE);
+                        arrIndexes[3]++;
                         hearts[countHearts--].setVisibility(View.INVISIBLE);
                         player.start();
+
                     } else {
-                        rocks[h][num4].setVisibility(View.GONE);
-                        rocks[++h][num4].setVisibility(View.VISIBLE);
+                        rocks[arrIndexes[3]][arrNumbers[3]].setVisibility(View.GONE);
+                        rocks[++arrIndexes[3]][arrNumbers[3]].setVisibility(View.VISIBLE);
                     }
 
 
                 }
 
             } else {
-                rocks[h][num4].setVisibility(View.GONE);
-                explosion[num4].setVisibility(View.GONE);
+                rocks[arrIndexes[3]][arrNumbers[3]].setVisibility(View.GONE);
+                explosion[arrNumbers[3]].setVisibility(View.GONE);
                 cars[countCars].setVisibility(View.VISIBLE);
-                num4 = setRandom();
-                h = 0;
-                rocks[h][num4].setVisibility(View.VISIBLE);
+                arrNumbers[3] = setRandom();
+                arrIndexes[3] = 0;
+                rocks[arrIndexes[3]][arrNumbers[3]].setVisibility(View.VISIBLE);
+
+            }
+
+        }
+        if (arrOnStart[4] && oneJump == 8) {
+            arrNumbers[4] = setRandom();
+            arrOnStart[4] = false;
+        }
+        if (!arrOnStart[4]) {
+            if (arrIndexes[4] < 9) {
+                if (arrIndexes[4] == -1) {
+                    rocks[++arrIndexes[4]][arrNumbers[4]].setVisibility(View.VISIBLE);
+
+                } else {
+                    if (arrIndexes[4] == 8 && arrNumbers[4] == countCars) {
+                        vibrate();
+                        toast("Ouch!");
+                        rocks[arrIndexes[4]][arrNumbers[4]].setVisibility(View.GONE);
+                        explosion[arrNumbers[4]].setVisibility(View.VISIBLE);
+                        cars[arrNumbers[4]].setVisibility(View.GONE);
+                        arrIndexes[4]++;
+                        hearts[countHearts--].setVisibility(View.INVISIBLE);
+                        player.start();
+                    } else {
+                        rocks[arrIndexes[4]][arrNumbers[4]].setVisibility(View.GONE);
+                        rocks[++arrIndexes[4]][arrNumbers[4]].setVisibility(View.VISIBLE);
+                    }
+
+
+                }
+
+            } else {
+                rocks[arrIndexes[4]][arrNumbers[4]].setVisibility(View.GONE);
+                explosion[arrNumbers[4]].setVisibility(View.GONE);
+                cars[countCars].setVisibility(View.VISIBLE);
+                arrNumbers[4] = setRandom();
+                arrIndexes[4] = 0;
+                rocks[arrIndexes[4]][arrNumbers[4]].setVisibility(View.VISIBLE);
 
             }
         }
@@ -670,22 +677,25 @@ public class MainActivitySensors extends AppCompatActivity {
     }
 
 
+
+
+    //Sensors
     private int setRandom() {
         int num = (int) (Math.random() * (max - min)) + min;
         return num;
     }
-
-    //Sensors
     @Override
     protected void onResume() {
         super.onResume();
-        sensorManager.registerListener(accSensorEventListener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+        if(mode.equals("sensors"))
+            sensorManager.registerListener(accSensorEventListener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        sensorManager.unregisterListener(accSensorEventListener);
+        if(mode.equals("sensors"))
+            sensorManager.unregisterListener(accSensorEventListener);
     }
 
     private void initSensor() {
@@ -710,13 +720,13 @@ public class MainActivitySensors extends AppCompatActivity {
                     cars[countCars].setVisibility(View.GONE);
                     hearts[countHearts--].setVisibility(View.INVISIBLE);
                     player.start();
-                    if (coins[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
-                        vibrate();
-                        toast("WOW!");
-                        coins[9][countCars].setVisibility(View.GONE);
-                        coin.start();
-                        coinsCounter++;
-                    }
+                }
+                if (coins[9][countCars].getVisibility() == View.VISIBLE && cars[countCars].getVisibility() == View.VISIBLE) {
+                    vibrate();
+                    toast("WOW!");
+                    coins[9][countCars].setVisibility(View.GONE);
+                    coin.start();
+                    coinsCounter++;
                 }
             }
         } else if (countCars > 0) {

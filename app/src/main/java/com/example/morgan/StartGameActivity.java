@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class StartGameActivity extends AppCompatActivity {
     private TextView text, recordsAndMap;
     private CheckBox sensors;
+    public static final String MODE = "MODE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +35,16 @@ public class StartGameActivity extends AppCompatActivity {
             text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //startActivity(new Intent(StartGameActivity.this, MainActivitySensors.class));
-
-                    if(sensors.isChecked())
-                     startActivity(new Intent(StartGameActivity.this, MainActivitySensors.class));
-                    else
-                        startActivity(new Intent(StartGameActivity.this, MainActivityArrows.class));
-
+                    Intent mainIntent = new Intent(StartGameActivity.this, MainActivitySensors.class);
+                    if(sensors.isChecked()) {
+                        mainIntent.putExtra(MODE, "sensors");
+                        startActivity(mainIntent);
+                    } else {
+                        mainIntent.putExtra(MODE, "arrows");
+                        startActivity(mainIntent);
+                    }
                 }
             });
-
-//            text.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    startActivity(new Intent(StartGameActivity.this, MainActivityArrows.class));
-//                }
-//            });
-
 
         recordsAndMap.setOnClickListener(new View.OnClickListener() {
             @Override
